@@ -1,12 +1,12 @@
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=carlosdelfino.Gemeo-Digital---Cidades-Inteligentes)
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=ArvoreDosSaberes.Gemeo-Digital---Cidades-Inteligentes)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-blue.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 ![Language: Portuguese](https://img.shields.io/badge/Language-Portuguese-brightgreen.svg)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)
 ![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Prática-green)
 ![Status](https://img.shields.io/badge/Status-Educa%C3%A7%C3%A3o-brightgreen)
-![Repository Size](https://img.shields.io/github/repo-size/carlosdelfino/Gemeo-Digital---Cidades-Inteligentes)
-![Last Commit](https://img.shields.io/github/last-commit/carlosdelfino/Gemeo-Digital---Cidades-Inteligentes)
+![Repository Size](https://img.shields.io/github/repo-size/ArvoreDosSaberes/Gemeo-Digital---Cidades-Inteligentes)
+![Last Commit](https://img.shields.io/github/last-commit/ArvoreDosSaberes/Gemeo-Digital---Cidades-Inteligentes)
 
 <!-- Animated Header -->
 <p align="center">
@@ -85,9 +85,10 @@ O projeto possui um hook de pre-commit que atualiza automaticamente o histórico
 **Data de Criação:** 2025-04-25
 **Autor:** Rapport GenerAtiva
 **Versão:** 1.0
-**Última Atualização:** 2026-04-25
+**Última Atualização:** 2026-04-28
 **Atualizado por:** Carlos Delfino
 **Histórico de Alterações:**
+- 2026-04-28 - Atualizado por Carlos Delfino - Scripts para hooks do git....
 - 2026-04-25 - Atualizado por Carlos Delfino - Slides e informação sobre o projeto....
 - 2026-04-25 - Atualizado por Carlos Delfino - Slides e informação sobre o projeto....
 - 2025-04-25 - Criado por Rapport GenerAtiva - Versão 1.0
