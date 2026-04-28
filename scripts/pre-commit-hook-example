@@ -1,0 +1,29 @@
+#!/bin/bash
+# Hook pre-commit para atualizar histórico de arquivos markdown
+# Este script chama o markdown_history_manager.py para atualizar
+# automaticamente o histórico de alterações em arquivos .md
+
+# Obtém o diretório raiz do repositório
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# Caminho para o script Python
+SCRIPT_PATH="$REPO_ROOT/scripts/markdown_history_manager.py"
+
+# Verifica se o script existe
+if [ ! -f "$SCRIPT_PATH" ]; then
+    echo "⚠️ Aviso: Script de histórico não encontrado em $SCRIPT_PATH"
+    echo "⚠️ O hook será ignorado."
+    exit 0
+fi
+
+# Verifica se Python está disponível
+if ! command -v python3 &> /dev/null; then
+    echo "⚠️ Aviso: Python3 não encontrado. O hook será ignorado."
+    exit 0
+fi
+
+# Executa o script Python
+python3 "$SCRIPT_PATH"
+
+# O hook não deve falhar o commit mesmo se houver erro no script
+exit 0
