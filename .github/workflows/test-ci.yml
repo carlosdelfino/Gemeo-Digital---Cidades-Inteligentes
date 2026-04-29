@@ -32,7 +32,7 @@ jobs:
         ports:
           - 11434:11434
         options: >-
-          --health-cmd ollama list
+          --health-cmd "ollama list"
           --health-interval 30s
           --health-timeout 10s
           --health-retries 5
@@ -179,7 +179,7 @@ jobs:
         ports:
           - 11434:11434
         options: >-
-          --health-cmd ollama list
+          --health-cmd "ollama list"
           --health-interval 30s
           --health-timeout 10s
           --health-retries 5
