@@ -1,5 +1,5 @@
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=ArvoreDosSaberes.Gemeo-Digital---Cidades-Inteligentes.biblioteca.Desafio-1)
-[![License: Private](https://img.shields.io/badge/License-Private-red.svg)](mailto:consultoria@carlosdelfino.eti.br)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-blue.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 ![Language: Portuguese](https://img.shields.io/badge/Language-Portuguese-brightgreen.svg)
 ![Status](https://img.shields.io/badge/Status-Educa%C3%A7%C3%A3o-brightgreen)
 
@@ -64,6 +64,7 @@ Este documento define:
 **Última Atualização:** 2026-04-29
 **Atualizado por:** Carlos Delfino
 **Histórico de Alterações:**
+- 2026-04-29 - Atualizado por Carlos Delfino - Arquivos a serem ignorados....
 - 2026-04-29 - Atualizado por Carlos Delfino - novos ajustes...
 - 2026-04-28 - Atualizado por Carlos Delfino - ajuste na regra para windsurf....
 - 2026-04-26 - Atualizado por Carlos Delfino - Planejamento, apenas para acompanhamento...

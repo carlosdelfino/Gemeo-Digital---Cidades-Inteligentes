@@ -1,5 +1,5 @@
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=ArvoreDosSaberes.Gemeo-Digital---Cidades-Inteligentes.PLANEJAMENTO)
-[![License: Private](https://img.shields.io/badge/License-Private-red.svg)](mailto:consultoria@carlosdelfino.eti.br)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-blue.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 ![Language: Portuguese](https://img.shields.io/badge/Language-Portuguese-brightgreen.svg)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)
@@ -42,6 +42,7 @@ Use este arquivo para acompanhar o progresso do grupo durante o desafio. Marque 
 **Última Atualização:** 2026-04-29
 **Atualizado por:** Carlos Delfino
 **Histórico de Alterações:**
+- 2026-04-29 - Atualizado por Carlos Delfino - Arquivos a serem ignorados....
 - 2026-04-29 - Atualizado por Carlos Delfino - novos ajustes...
 - 2026-04-28 - Atualizado por Carlos Delfino - Scripts para hooks do git....
 - 2026-04-25 - Atualizado por Carlos Delfino - Arquivos que não devem estar no repositório...
