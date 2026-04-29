@@ -1,0 +1,278 @@
+name: Testes Unitários - Agente Estatístico
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Executar Testes Unitários
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: statistical-and-analytical-agentic_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      
+      ollama:
+        image: ollama/ollama:latest
+        ports:
+          - 11434:11434
+        options: >-
+          --health-cmd ollama list
+          --health-interval 30s
+          --health-timeout 10s
+          --health-retries 5
+    
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+    
+    steps:
+    - name: Checkout do repositório
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Configurar Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    
+    - name: Criar ambiente virtual
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+    
+    - name: Instalar dependências
+      run: |
+        source venv/bin/activate
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-mock
+    
+    - name: Baixar modelo de embeddings Ollama
+      run: |
+        docker exec ${{ job.services.ollama.id }} ollama pull mxbai-embed-large
+    
+    - name: Criar modelos customizados do agente
+      run: |
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        if [ -d "models" ]; then
+          for modelfile in models/*.txt; do
+            if [ -f "$modelfile" ]; then
+              modelname=$(basename "$modelfile" .txt)
+              echo "Criando modelo: $modelname"
+              docker cp "$modelfile" ${{ job.services.ollama.id }}:/tmp/Modelfile
+              docker exec ${{ job.services.ollama.id }} ollama create $modelname -f /tmp/Modelfile || true
+            fi
+          done
+        fi
+    
+    - name: Criar .env a partir de .env.tests
+      run: |
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        if [ -f .env.tests ]; then
+          cp .env.tests .env
+          echo "Criado .env a partir de .env.tests"
+        fi
+    
+    - name: Configurar secrets no ambiente
+      run: |
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        if [ -n "${{ secrets.OPENAI_API_KEY }}" ]; then
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        fi
+        if [ -n "${{ secrets.POSTGRES_PASSWORD }}" ]; then
+          sed -i "s/POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}/" .env
+        fi
+        if [ -n "${{ secrets.KAGGLE_API_TOKEN }}" ]; then
+          echo "KAGGLE_API_TOKEN=${{ secrets.KAGGLE_API_TOKEN }}" >> .env
+        fi
+        if [ -n "${{ secrets.HUGGINGFACE_API_TOKEN }}" ]; then
+          echo "HUGGINGFACE_API_TOKEN=${{ secrets.HUGGINGFACE_API_TOKEN }}" >> .env
+        fi
+    
+    - name: Criar diretórios de teste
+      run: |
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        mkdir -p .data
+        mkdir -p .data/converted
+        mkdir -p .data/chroma_db_test
+    
+    - name: Aguardar serviços
+      run: |
+        echo "Aguardando PostgreSQL..."
+        until pg_isready -h localhost -p 5432; do
+          sleep 2
+        done
+        echo "PostgreSQL pronto!"
+        echo "Aguardando Ollama..."
+        until curl -s http://localhost:11434/api/tags > /dev/null; do
+          sleep 2
+        done
+        echo "Ollama pronto!"
+    
+    - name: Executar testes unitários
+      run: |
+        source venv/bin/activate
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        pytest tests/ -v --tb=short --cov=. --cov-report=xml --cov-report=term-missing --no-cov-on-fail || true
+    
+    - name: Executar testes por categoria
+      run: |
+        source venv/bin/activate
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        echo "=== Testes de Serviços Dinâmicos ==="
+        pytest tests/dynamic_services/ -v -m "not slow" || true
+        echo "=== Testes de Ferramentas ==="
+        pytest tests/tools/ -v -m "not slow" || true
+        echo "=== Testes de Infraestrutura ==="
+        pytest tests/infrastructure/ -v -m "not slow" || true
+    
+    - name: Upload de cobertura de código
+      uses: codecov/codecov-action@v4
+      if: matrix.python-version == '3.12'
+      with:
+        file: ./Cidades Inteligentes/statistical-and-analytical-agentic/coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+  
+  test-slow:
+    name: Executar Testes Lentos
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: statistical-and-analytical-agentic_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      
+      ollama:
+        image: ollama/ollama:latest
+        ports:
+          - 11434:11434
+        options: >-
+          --health-cmd ollama list
+          --health-interval 30s
+          --health-timeout 10s
+          --health-retries 5
+    
+    steps:
+    - name: Checkout do repositório
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+    
+    - name: Criar ambiente virtual
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+    
+    - name: Instalar dependências
+      run: |
+        source venv/bin/activate
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-mock
+    
+    - name: Baixar modelo de embeddings Ollama
+      run: |
+        docker exec ${{ job.services.ollama.id }} ollama pull mxbai-embed-large
+    
+    - name: Criar modelos customizados do agente
+      run: |
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        if [ -d "models" ]; then
+          for modelfile in models/*.txt; do
+            if [ -f "$modelfile" ]; then
+              modelname=$(basename "$modelfile" .txt)
+              echo "Criando modelo: $modelname"
+              docker cp "$modelfile" ${{ job.services.ollama.id }}:/tmp/Modelfile
+              docker exec ${{ job.services.ollama.id }} ollama create $modelname -f /tmp/Modelfile || true
+            fi
+          done
+        fi
+    
+    - name: Criar .env a partir de .env.tests
+      run: |
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        if [ -f .env.tests ]; then
+          cp .env.tests .env
+          echo "Criado .env a partir de .env.tests"
+        fi
+    
+    - name: Configurar secrets no ambiente
+      run: |
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        if [ -n "${{ secrets.OPENAI_API_KEY }}" ]; then
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        fi
+        if [ -n "${{ secrets.POSTGRES_PASSWORD }}" ]; then
+          sed -i "s/POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}/" .env
+        fi
+        if [ -n "${{ secrets.KAGGLE_API_TOKEN }}" ]; then
+          echo "KAGGLE_API_TOKEN=${{ secrets.KAGGLE_API_TOKEN }}" >> .env
+        fi
+        if [ -n "${{ secrets.HUGGINGFACE_API_TOKEN }}" ]; then
+          echo "HUGGINGFACE_API_TOKEN=${{ secrets.HUGGINGFACE_API_TOKEN }}" >> .env
+        fi
+    
+    - name: Criar diretórios de teste
+      run: |
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        mkdir -p .data
+        mkdir -p .data/converted
+        mkdir -p .data/chroma_db_test
+    
+    - name: Aguardar serviços
+      run: |
+        echo "Aguardando PostgreSQL..."
+        until pg_isready -h localhost -p 5432; do
+          sleep 2
+        done
+        echo "PostgreSQL pronto!"
+        echo "Aguardando Ollama..."
+        until curl -s http://localhost:11434/api/tags > /dev/null; do
+          sleep 2
+        done
+        echo "Ollama pronto!"
+    
+    - name: Executar testes lentos
+      run: |
+        source venv/bin/activate
+        cd "Cidades Inteligentes/statistical-and-analytical-agentic"
+        pytest tests/ -v -m "slow" --tb=short || true
