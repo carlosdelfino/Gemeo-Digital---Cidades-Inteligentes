@@ -18,7 +18,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: test_password
-          POSTGRES_DB: statistical-and-analytical-agentic_test
+          POSTGRES_DB: statistical_and_analytical_agentic_test
         ports:
           - 5432:5432
         options: >-
@@ -90,6 +90,9 @@ jobs:
         if [ -f .env.tests ]; then
           cp .env.tests .env
           echo "Criado .env a partir de .env.tests"
+          cat .env
+        else
+          echo "Warning: .env.tests not found"
         fi
     
     - name: Configurar secrets no ambiente
@@ -118,7 +121,7 @@ jobs:
     - name: Aguardar serviços
       run: |
         echo "Aguardando PostgreSQL..."
-        until pg_isready -h localhost -p 5432; do
+        until pg_isready -h localhost -p 5432 -U postgres; do
           sleep 2
         done
         echo "PostgreSQL pronto!"
@@ -165,7 +168,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: test_password
-          POSTGRES_DB: statistical-and-analytical-agentic_test
+          POSTGRES_DB: statistical_and_analytical_agentic_test
         ports:
           - 5432:5432
         options: >-
@@ -233,6 +236,9 @@ jobs:
         if [ -f .env.tests ]; then
           cp .env.tests .env
           echo "Criado .env a partir de .env.tests"
+          cat .env
+        else
+          echo "Warning: .env.tests not found"
         fi
     
     - name: Configurar secrets no ambiente
@@ -261,7 +267,7 @@ jobs:
     - name: Aguardar serviços
       run: |
         echo "Aguardando PostgreSQL..."
-        until pg_isready -h localhost -p 5432; do
+        until pg_isready -h localhost -p 5432 -U postgres; do
           sleep 2
         done
         echo "PostgreSQL pronto!"
