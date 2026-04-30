@@ -364,7 +364,7 @@
           <p class="card-subtitle">O que estamos tentando resolver? Por que isso importa?</p>
         </div>
       </div>
-      <textarea placeholder="Descreva o contexto do problema, o cenário organizacional e por que a solução tem valor estratégico ou operacional…"></textarea>
+      <textarea>Gestores públicos precisam entender como as pessoas se deslocam na cidade (origem, destino e intensidade), mas os dados disponíveis são fragmentados e não possuem essa informação explícita. Isso dificulta o planejamento urbano eficiente baseado em evidências.</textarea>
     </div>
 
     <!-- 2 -->
@@ -376,7 +376,7 @@
           <p class="card-subtitle">Qual pergunta o modelo precisa responder?</p>
         </div>
       </div>
-      <textarea placeholder="Ex: "Qual a probabilidade de um cliente cancelar o serviço nos próximos 30 dias?" Seja específico e mensurável…"></textarea>
+      <textarea>"Como inferir a origem, o destino e os padrões de deslocamento dos veículos a partir de leituras pontuais de sensores viários?"</textarea>
     </div>
 
     <!-- 3 -->
@@ -388,7 +388,7 @@
           <p class="card-subtitle">O que exatamente estamos prevendo / inferindo?</p>
         </div>
       </div>
-      <textarea placeholder="Nome da variável, tipo (binária, contínua, categórica), e como ela é definida no dataset…"></textarea>
+      <textarea>Probabilidade de fluxo Origem → Destino (Matriz O-D). Tipo: Probabilística/Contínua. Definição: Estimativa da probabilidade de um veículo sair de uma zona e chegar em outra dentro de um intervalo de tempo.</textarea>
     </div>
 
     <!-- 4 -->
@@ -400,7 +400,7 @@
           <p class="card-subtitle">Quais dados temos? Quais limitações existem?</p>
         </div>
       </div>
-      <textarea placeholder="Fontes, volume, granularidade, período coberto. Indique também vieses, dados faltantes, restrições de acesso ou questões de privacidade…"></textarea>
+      <textarea>Placas anonimizadas, data/hora, localização GPS, velocidade e volume. Limitações: dados fragmentados, sem origem/destino explícitos, cobertura parcial (50 sensores), ruído e inconsistência. Os dados são indiretos — a informação precisa ser inferida.</textarea>
     </div>
 
     <!-- 5 -->
@@ -412,7 +412,7 @@
           <p class="card-subtitle">Qual abordagem será usada? (Por quê?)</p>
         </div>
       </div>
-      <textarea placeholder="Tipo de aprendizado (supervisionado, não supervisionado, etc.), família de algoritmos considerados e justificativa para a escolha…"></textarea>
+      <textarea>Abordagem híbrida: (1) Modelagem de Grafos (nós=sensores/zonas, arestas=fluxos), (2) Modelos Probabilísticos (Cadeia de Markov, Inferência Bayesiana), (3) Clusterização (grupos de deslocamento similares). Reconstrói trajetórias usando tempo entre sensores e proximidade geográfica.</textarea>
     </div>
 
     <!-- 6 -->
@@ -424,7 +424,7 @@
           <p class="card-subtitle">Como sabemos que o modelo funciona?</p>
         </div>
       </div>
-      <textarea placeholder="Ex: AUC-ROC, F1-Score, RMSE, Acurácia Balanceada… Explique por que essa métrica é adequada ao problema de negócio…"></textarea>
+      <textarea>Coerência dos fluxos inferidos, consistência temporal dos padrões, validação cruzada entre sensores, similaridade entre fluxos esperados vs estimados, estabilidade dos padrões ao longo do tempo. Avaliação baseada na plausibilidade e consistência dos padrões inferidos.</textarea>
     </div>
 
     <!-- 7 -->
@@ -436,7 +436,7 @@
           <p class="card-subtitle">O que queremos gerar?</p>
         </div>
       </div>
-      <textarea placeholder="Tipo de entrega: dashboard, modelo em produção, relatório de insights, API, visualização interativa…"></textarea>
+      <textarea>Matriz Origem-Destino, mapas de fluxo, gráficos por horário, clusters de mobilidade. Entregáveis: Dashboard interativo, relatório analítico com insights e recomendações, visualizações interativas para comunicação com stakeholders.</textarea>
     </div>
 
     <!-- 8 -->
@@ -448,7 +448,7 @@
           <p class="card-subtitle">Como isso ajudaria na prática?</p>
         </div>
       </div>
-      <textarea placeholder="Quantifique se possível: redução de custo, ganho de eficiência, melhora na experiência do usuário, redução de risco. Quem se beneficia e como?…"></textarea>
+      <textarea readonly>Melhor planejamento urbano com dados reais, otimização do transporte público alinhado à demanda, redução de congestionamentos através de intervenções direcionadas, apoio à tomada de decisão com inteligência acionável. Transforma dados fragmentados em políticas públicas baseadas em evidências.</textarea>
     </div>
 
   </div>
