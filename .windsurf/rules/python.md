@@ -18,7 +18,8 @@ Sempre que houver complexidade no processo de tratamento dos dados, use threads,
 **Data de Criação:** 2026-04-28
 **Autor:** Carlos Delfino
 **Versão:** 1.0
-**Última Atualização:** 2026-04-28
+**Última Atualização:** 2026-05-08
 **Atualizado por:** Carlos Delfino
 **Histórico de Alterações:**
+- 2026-05-08 - Atualizado por Carlos Delfino - Removendo arquivos do Agentic....
 - 2026-04-28 - Criado por Carlos Delfino - Versão 1.0

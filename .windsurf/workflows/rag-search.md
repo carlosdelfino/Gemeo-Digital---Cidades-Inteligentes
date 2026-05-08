@@ -43,3 +43,14 @@ Cada resultado inclui:
 ## Configuração
 
 Este workflow usa o MCP server `rag-local` que deve estar configurado no Windsurf.
+
+
+---
+**Resumo:** Arquivo markdown gerenciado com histórico automático
+**Data de Criação:** 2026-05-08
+**Autor:** Carlos Delfino
+**Versão:** 1.0
+**Última Atualização:** 2026-05-08
+**Atualizado por:** Carlos Delfino
+**Histórico de Alterações:**
+- 2026-05-08 - Criado por Carlos Delfino - Versão 1.0

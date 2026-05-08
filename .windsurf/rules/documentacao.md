@@ -69,8 +69,9 @@ O Autor Inicial e quem atualizou inicialmente é "Rapport GenerAtiva".
 **Autor:** [Nome do autor, se aplicável]
 **Versão:** [Versão do documento, se aplicável]
 **Última Atualização:** [AAAA-MM-DD]
-**Atualizado por:** [Nome de quem atualizou]
+**Atualizado por:** Carlos Delfino
 **Histórico de Alterações:**
+- 2026-05-08 - Atualizado por Carlos Delfino - Removendo arquivos do Agentic....
 - [AAAA-MM-DD] - Criado por [Autor] - Versão [Versão]
 - [AAAA-MM-DD] - Atualizado por [Autor] - [Descrição da alteração] - Versão [Versão]
 ```
@@ -154,21 +155,22 @@ Conteúdo específico do arquivo aqui...
 **Autor:** [Nome do autor, se aplicável]
 **Versão:** [Versão do documento, se aplicável]
 **Última Atualização:** [AAAA-MM-DD]
-**Atualizado por:** [Nome de quem atualizou]
+**Atualizado por:** Carlos Delfino
 **Histórico de Alterações:**
+- 2026-05-08 - Atualizado por Carlos Delfino - Removendo arquivos do Agentic....
 - [AAAA-MM-DD] - Criado por [Autor] - Versão [Versão]
 - [AAAA-MM-DD] - Atualizado por [Autor] - [Descrição da alteração] - Versão [Versão]
 ```
 
 ---
 
-**Resumo:** Regras padronizadas e otimizadas para formatação de arquivos markdown no projeto RISC-V Resilience, eliminando ambiguidades e garantindo consistência.
+**Resumo:** Regras padronizadas e otimizadas para formatação de arquivos markdown, eliminando ambiguidades e garantindo consistência.
 **Data de Criação:** 2025-10-15
-**Autor:** Rapport Generativa
+**Autor:** Rapport GenerAtiva
 **Versão:** 2.0
-**Última Atualização:** 2025-04-02
-**Atualizado por:** Rapport Generativa
+**Última Atualização:** 2026-05-08
+**Atualizado por:** Carlos Delfino
 **Histórico de Alterações:**
-
+- 2026-05-08 - Atualizado por Carlos Delfino - Removendo arquivos do Agentic....
 - 2025-10-15 - Criado por Sistema de Documentação - Versão 2.0
 - 2025-04-02 - Atualizado por Sistema de Documentação - Adicionado histórico automático e integração com git - Versão 2.1

@@ -167,3 +167,14 @@ Ao criar ou modificar código, verifique:
 - Regras de Logs: `logs.md`
 - Regras de Projeto: `projeto.md`
 - Regras de Validação: `validacao_da_das_correcoes_e_testes.md`
+
+
+---
+**Resumo:** Arquivo markdown gerenciado com histórico automático
+**Data de Criação:** 2026-05-08
+**Autor:** Carlos Delfino
+**Versão:** 1.0
+**Última Atualização:** 2026-05-08
+**Atualizado por:** Carlos Delfino
+**Histórico de Alterações:**
+- 2026-05-08 - Criado por Carlos Delfino - Versão 1.0

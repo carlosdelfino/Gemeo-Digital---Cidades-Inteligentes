@@ -152,3 +152,14 @@ Este workflow usa o MCP server `rag-local` com:
 - `/rag-search-pdf` - Busca com links para PDFs
 - `rag_open_pdf` - Abre PDF automaticamente
 - `rag_list_books` - Lista todos os livros
+
+
+---
+**Resumo:** Arquivo markdown gerenciado com histórico automático
+**Data de Criação:** 2026-05-08
+**Autor:** Carlos Delfino
+**Versão:** 1.0
+**Última Atualização:** 2026-05-08
+**Atualizado por:** Carlos Delfino
+**Histórico de Alterações:**
+- 2026-05-08 - Criado por Carlos Delfino - Versão 1.0

@@ -68,3 +68,14 @@ Busque por "transformer architecture" e me mostre os 3 melhores resultados com l
 ## Configuração
 
 Este workflow usa o MCP server `rag-local` com suporte aprimorado para PDFs. Certifique-se de que os PDFs originais estejam acessíveis nos caminhos registrados no banco de dados.
+
+
+---
+**Resumo:** Arquivo markdown gerenciado com histórico automático
+**Data de Criação:** 2026-05-08
+**Autor:** Carlos Delfino
+**Versão:** 1.0
+**Última Atualização:** 2026-05-08
+**Atualizado por:** Carlos Delfino
+**Histórico de Alterações:**
+- 2026-05-08 - Criado por Carlos Delfino - Versão 1.0

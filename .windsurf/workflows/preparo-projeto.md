@@ -122,8 +122,9 @@ Conteúdo do projeto...
 **Autor:** [Nome]
 **Versão:** [Versão]
 **Última Atualização:** [AAAA-MM-DD]
-**Atualizado por:** [Nome]
+**Atualizado por:** Carlos Delfino
 **Histórico de Alterações:**
+- 2026-05-08 - Atualizado por Carlos Delfino - Removendo arquivos do Agentic....
 - [AAAA-MM-DD] - Criado por [Autor] - Versão [Versão]
 ```
 
