@@ -1,464 +1,454 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canvas — Estrutura do Projeto</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1a1a2e;
-    --paper: #f5f0e8;
-    --cream: #ede8d8;
-    --accent: #c0392b;
-    --accent2: #2980b9;
-    --gold: #c9a84c;
-    --light-rule: #d4cfc0;
-    --card-bg: #faf7f0;
-    --shadow: rgba(26,26,46,0.12);
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gêmeo Digital: Inteligência em Mobilidade Urbana</title>
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #070913;
+            --bg-glass: rgba(15, 20, 35, 0.7);
+            --neon-cyan: #00F0FF;
+            --neon-magenta: #FF0055;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+        }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'IBM Plex Sans', sans-serif;
-    min-height: 100vh;
-    padding: 40px 20px 60px;
-  }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-  /* Subtle grid texture */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(180,170,150,0.15) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(180,170,150,0.15) 1px, transparent 1px);
-    background-size: 32px 32px;
-    pointer-events: none;
-    z-index: 0;
-  }
+        /* Fundo Animado com grid */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-  .wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+        /* Navbar Glassmorphism */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(7, 9, 19, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  /* ─── HEADER ─── */
-  header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    border-bottom: 3px solid var(--ink);
-    padding-bottom: 18px;
-    margin-bottom: 36px;
-    gap: 20px;
-  }
+        nav .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            text-decoration: none;
+        }
 
-  .header-left { flex: 1; }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
-  .eyebrow {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
 
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.4rem);
-    font-weight: 900;
-    line-height: 1;
-    color: var(--ink);
-  }
+        nav a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 8px var(--neon-cyan);
+        }
 
-  h1 span {
-    color: var(--accent);
-  }
+        /* Hero Section com Imagem de Fundo */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            /* Overlay escuro + Imagem */
+            background: linear-gradient(rgba(7, 9, 19, 0.75), rgba(7, 9, 19, 0.95)), url('img/smat_cities01.png') center/cover no-repeat;
+        }
 
-  .header-meta {
-    text-align: right;
-    flex-shrink: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 20px;
-    align-items: start;
-  }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
 
-  .meta-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #888;
-    margin-bottom: 4px;
-  }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
 
-  .meta-field {
-    border: none;
-    border-bottom: 1.5px solid var(--light-rule);
-    background: transparent;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    color: var(--ink);
-    width: 100%;
-    padding: 4px 2px;
-    outline: none;
-    transition: border-color 0.2s;
-    display: block;
-    margin-bottom: 14px;
-  }
-  .meta-field:focus { border-color: var(--accent); }
-  .meta-field::placeholder { color: #bbb; }
+        .btn {
+            padding: 12px 30px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
 
-  /* Full-width row inside the meta grid */
-  .meta-full {
-    grid-column: span 2;
-  }
+        .btn:hover {
+            background: var(--neon-cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 30px var(--neon-cyan);
+        }
 
-  /* Group name field — larger and highlighted */
-  .meta-field-group {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 700;
-    border-bottom: 2px solid var(--gold);
-    color: var(--ink);
-  }
-  .meta-field-group:focus { border-color: var(--accent); }
+        /* Estrutura Geral das Seções */
+        section {
+            padding: 100px 10%;
+        }
 
-  .meta-label-group {
-    color: var(--gold);
-  }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
 
-  /* ─── GRID ─── */
-  .canvas-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto;
-    gap: 14px;
-  }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--neon-magenta);
+            margin: 15px auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--neon-magenta);
+        }
 
-  /* Layout das células */
-  .card:nth-child(1) { grid-column: span 2; }
-  .card:nth-child(2) { grid-column: span 2; }
-  .card:nth-child(3) { grid-column: span 1; }
-  .card:nth-child(4) { grid-column: span 3; }
-  .card:nth-child(5) { grid-column: span 2; }
-  .card:nth-child(6) { grid-column: span 2; }
-  .card:nth-child(7) { grid-column: span 1; }
-  .card:nth-child(8) { grid-column: span 3; }
+        /* Cards Glassmorphism */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-  /* ─── CARD ─── */
-  .card {
-    background: var(--card-bg);
-    border: 1.5px solid var(--light-rule);
-    border-radius: 4px;
-    padding: 18px 20px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: relative;
-    transition: box-shadow 0.2s, border-color 0.2s;
-    min-height: 160px;
-  }
+        .card {
+            background: var(--bg-glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
 
-  .card:hover {
-    box-shadow: 4px 4px 0 var(--light-rule);
-    border-color: #b8b2a0;
-  }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+        }
 
-  .card:focus-within {
-    border-color: var(--accent);
-    box-shadow: 4px 4px 0 rgba(192,57,43,0.15);
-  }
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
 
-  /* Colored top bar per card */
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    border-radius: 3px 3px 0 0;
-  }
+        .card i {
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-  .card:nth-child(1)::before { background: var(--accent); }
-  .card:nth-child(2)::before { background: var(--accent2); }
-  .card:nth-child(3)::before { background: #8e44ad; }
-  .card:nth-child(4)::before { background: #16a085; }
-  .card:nth-child(5)::before { background: var(--gold); }
-  .card:nth-child(6)::before { background: #d35400; }
-  .card:nth-child(7)::before { background: #27ae60; }
-  .card:nth-child(8)::before { background: #2c3e50; }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        .card p {
+            text-align: justify;
+            flex-grow: 1;
+        }
 
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+        /* Iframe Containers */
+        .iframe-container {
+            width: 100%;
+            height: 85vh;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+            margin-bottom: 50px;
+        }
 
-  .card-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 900;
-    line-height: 1;
-    opacity: 0.08;
-    flex-shrink: 0;
-    user-select: none;
-  }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
-  .card-title-group { flex: 1; }
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+            justify-items: center;
+            align-items: stretch;
+        }
 
-  .card-title {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink);
-    line-height: 1.2;
-  }
+        .team-member {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .team-member:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--neon-magenta);
+        }
 
-  .card-subtitle {
-    font-size: 11px;
-    color: #999;
-    margin-top: 2px;
-    font-style: italic;
-    line-height: 1.3;
-  }
+        /* Footer */
+        footer {
+            background: rgba(0,0,0,0.8);
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,0,85, 0.3);
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-muted);
+        }
 
-  textarea {
-    flex: 1;
-    width: 100%;
-    min-height: 80px;
-    border: none;
-    background: transparent;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.65;
-    color: var(--ink);
-    resize: none;
-    outline: none;
-    border-bottom: 1px dashed var(--light-rule);
-    padding-bottom: 4px;
-    transition: border-color 0.2s;
-  }
+        footer h4 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
 
-  textarea:focus {
-    border-bottom-color: var(--accent);
-  }
+        footer span {
+            color: var(--neon-magenta);
+        }
 
-  textarea::placeholder {
-    color: #c8c0ac;
-    font-style: italic;
-  }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
 
-  /* ─── FOOTER ─── */
-  footer {
-    margin-top: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1.5px solid var(--light-rule);
-    padding-top: 16px;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
+        /* Canvas Específico */
+        .canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        @media (max-width: 900px) {
+            .canvas-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            nav ul { display: none; } /* Mobile simplificado */
+        }
 
-  .footer-note {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: #aaa;
-    text-transform: uppercase;
-  }
-
-  .btn-print {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-    padding: 10px 22px;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: background 0.2s, transform 0.1s;
-  }
-
-  .btn-print:hover { background: var(--accent); }
-  .btn-print:active { transform: scale(0.97); }
-
-  /* ─── PRINT ─── */
-  @media print {
-    body { background: white; padding: 10px; }
-    body::before { display: none; }
-    .btn-print { display: none; }
-    .card { break-inside: avoid; }
-    .canvas-grid { gap: 10px; }
-    header { margin-bottom: 20px; }
-  }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 700px) {
-    .canvas-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-    .card:nth-child(n) { grid-column: span 2; }
-    .card:nth-child(3),
-    .card:nth-child(7) { grid-column: span 1; }
-    header { flex-direction: column; align-items: flex-start; }
-    .header-meta { text-align: left; grid-template-columns: 1fr; width: 100%; }
-    .meta-full { grid-column: span 1; }
-    .meta-field { width: 100%; }
-  }
-</style>
+        .highlight-text {
+            color: var(--neon-cyan);
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<div class="wrapper">
+    <nav>
+        <a href="#" class="logo">Gêmeos Digitais</a>
+        <ul>
+            <li><a href="#contexto">Smart City</a></li>
+            <li><a href="#dados">Big Data</a></li>
+            <li><a href="#canvas">IA Canvas</a></li>
+            <li><a href="#dashboards">Dashboards</a></li>
+            <li><a href="#equipe">Equipe</a></li>
+        </ul>
+    </nav>
 
-  <header>
-    <div class="header-left">
-      <p class="eyebrow">Ciência de Dados &amp; IA Aplicada</p>
-      <h1>Canvas —<br><span>Estrutura</span> do Projeto</h1>
-    </div>
-    <div class="header-meta">
-      <!-- Row 1: Nome do Grupo (destaque) -->
-      <div class="meta-full">
-        <p class="meta-label meta-label-group">⬡ Nome do Grupo</p>
-        <input class="meta-field meta-field-group" type="text" placeholder="Batize sua equipe…">
-      </div>
-      <!-- Row 2: Desafio escolhido -->
-      <div class="meta-full">
-        <p class="meta-label">Desafio Escolhido</p>
-        <input class="meta-field" type="text" placeholder="Título ou tema do desafio…">
-      </div>
-      <!-- Row 3: Alunos(as) + Turma/Data -->
-      <div>
-        <p class="meta-label">Alunos(as)</p>
-        <input class="meta-field" type="text" placeholder="Nomes dos integrantes…">
-      </div>
-      <div>
-        <p class="meta-label">Turma / Data</p>
-        <input class="meta-field" type="text" placeholder="Ex: DS-2025 · 24 abr">
-      </div>
-    </div>
-  </header>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Inferência Origem-Destino via IA</h1>
+        <p>Um projeto de inteligência em mobilidade viária desenvolvido como Produto Mínimo Viável (MVP) para o desafio de <strong>Residência em Gêmeo Digital em 5G (Facens)</strong>. Convertendo 76 milhões de registros assíncronos em Zonas de Tráfego utilizando Inteligência Artificial Não-Supervisionada.</p>
+        <a href="#dashboards" class="btn"><i class="fas fa-play-circle"></i> Explorar Análises Visuais</a>
+    </section>
 
-  <div class="canvas-grid">
-
-    <!-- 1 -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-number">1</span>
-        <div class="card-title-group">
-          <p class="card-title">Problema de Negócio</p>
-          <p class="card-subtitle">O que estamos tentando resolver? Por que isso importa?</p>
+    <!-- CONTEXTO SMART CITY -->
+    <section id="contexto">
+        <h2 class="section-title">O Paradigma de Cidades Inteligentes</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="img/smat_cities02.png" alt="Cenário Brasileiro" class="card-img" onerror="this.style.display='none'">
+                <h3>O Cenário Brasileiro</h3>
+                <p>As Smart Cities utilizam sensores de IoT para otimizar funções urbanas. O Brasil possui um déficit brutal na integração de dados. Tomadas de decisão sobre novas linhas de ônibus ou expansões viárias são feitas muitas vezes no <em>achismo</em>, gerando trânsito e desperdício de recursos públicos.</p>
+            </div>
+            <div class="card">
+                <img src="img/smat_cities03.png" alt="Sorocaba Smart City" class="card-img" onerror="this.style.display='none'">
+                <h3>A Posição de Sorocaba</h3>
+                <p>Sorocaba/SP é referência e encontra-se no topo dos rankings de cidades mais conectadas do país. Nosso desafio utilizou a malha real de radares do município para aplicar o conceito prático de <strong>Digital Twins</strong> (Gêmeos Digitais), simulando e avaliando a cidade em ambiente virtual.</p>
+            </div>
+            <div class="card">
+                <img src="img/smat_cities04.png" alt="Missão Facens" class="card-img" onerror="this.style.display='none'">
+                <h3>A Missão: Residência 5G</h3>
+                <p>Patrocinado pela FACENS e parceiros de telecomunicações, este projeto coroa o módulo de <strong>IA Aplicada a Problemas Reais</strong>. A missão não era apenas codificar, mas traduzir a dor de gestores urbanos em inteligência acionável utilizando Inteligência Artificial espacial.</p>
+            </div>
         </div>
-      </div>
-      <textarea>Gestores públicos precisam entender como as pessoas se deslocam na cidade (origem, destino e intensidade), mas os dados disponíveis são fragmentados e não possuem essa informação explícita. Isso dificulta o planejamento urbano eficiente baseado em evidências.</textarea>
-    </div>
+    </section>
 
-    <!-- 2 -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-number">2</span>
-        <div class="card-title-group">
-          <p class="card-title">Pergunta Analítica</p>
-          <p class="card-subtitle">Qual pergunta o modelo precisa responder?</p>
+    <!-- BIG DATA -->
+    <section id="dados">
+        <h2 class="section-title">Engenharia de Dados (A Base)</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); text-align: center;">
+            <div class="card" style="border-color: var(--neon-magenta); align-items: center;">
+                <h3 style="font-size: 3rem; color: var(--neon-magenta); margin-bottom: 0;">76.6M</h3>
+                <p style="text-align: center;">Pings de Sensores Brutos</p>
+            </div>
+            <div class="card" style="border-color: var(--neon-cyan); align-items: center;">
+                <h3 style="font-size: 3rem; color: var(--neon-cyan); margin-bottom: 0;">61</h3>
+                <p style="text-align: center;">Radares Físicos Ativos</p>
+            </div>
+            <div class="card" style="border-color: var(--neon-magenta); align-items: center;">
+                <h3 style="font-size: 3rem; color: var(--neon-magenta); margin-bottom: 0;">3M+</h3>
+                <p style="text-align: center;">Veículos Únicos Rastreados</p>
+            </div>
+            <div class="card" style="border-color: var(--neon-cyan); align-items: center;">
+                <h3 style="font-size: 3rem; color: var(--neon-cyan); margin-bottom: 0;">DuckDB</h3>
+                <p style="text-align: center;">Processamento Out-of-Core</p>
+            </div>
         </div>
-      </div>
-      <textarea>"Como inferir a origem, o destino e os padrões de deslocamento dos veículos a partir de leituras pontuais de sensores viários?"</textarea>
-    </div>
+    </section>
 
-    <!-- 3 -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-number">3</span>
-        <div class="card-title-group">
-          <p class="card-title">Variável-Alvo</p>
-          <p class="card-subtitle">O que exatamente estamos prevendo / inferindo?</p>
+    <!-- CANVAS IA -->
+    <section id="canvas">
+        <h2 class="section-title">Business Model Canvas (IA)</h2>
+        <div class="canvas-grid">
+            <div class="card">
+                <h3><i class="fas fa-exclamation-triangle"></i> Problema</h3>
+                <p>Gestores não conhecem a <span class="highlight-text">Origem</span> e o <span class="highlight-text">Destino</span> da população. A base de dados registra apenas radares fragmentados, sem rotas completas declaradas ou rótulos de viagem.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-cogs"></i> Atividades-Chave</h3>
+                <p>Conversão do Big Data via <strong>Parquet</strong> e criação de rotas baseadas na <strong>Heurística de Inatividade de 45 minutos</strong>. Se um carro some por 45min do monitoramento, a viagem foi concluída matematicamente.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-network-wired"></i> Inteligência Artificial</h3>
+                <p>Adoção do <span class="highlight-text">DBSCAN</span> (Clusterização Espacial Não-Supervisionada). Em vez de estimar previamente o número de zonas na cidade (K-Means), a IA calculou puramente a densidade física para formar e delimitar Macro-Zonas reais.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-check-double"></i> Validação Científica</h3>
+                <p>Modelo avaliado e justificado através do <strong>Silhouette Score</strong> (Pontuação: 0.31). Trata-se da prova incontestável da coesão geométrica dos polos de densidade encontrados em Sorocaba, livres de falsos positivos.</p>
+            </div>
+            <div class="card" style="grid-column: span 2;">
+                <h3><i class="fas fa-chart-line"></i> A Solução (Impacto)</h3>
+                <p>A entrega de um <span class="highlight-text">Mapa de Calor Interativo</span> e um <span class="highlight-text">Dashboard Temporal</span> fornece às secretarias de mobilidade e infraestrutura as ferramentas cruciais para priorizar corredores críticos, prever o impacto de catástrofes em horários de pico e otimizar fisicamente o sistema de transporte da cidade inteligente.</p>
+            </div>
         </div>
-      </div>
-      <textarea>Probabilidade de fluxo Origem → Destino (Matriz O-D). Tipo: Probabilística/Contínua. Definição: Estimativa da probabilidade de um veículo sair de uma zona e chegar em outra dentro de um intervalo de tempo.</textarea>
-    </div>
+    </section>
 
-    <!-- 4 -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-number">4</span>
-        <div class="card-title-group">
-          <p class="card-title">Dados Disponíveis</p>
-          <p class="card-subtitle">Quais dados temos? Quais limitações existem?</p>
+    <!-- DASHBOARDS -->
+    <section id="dashboards">
+        <h2 class="section-title">Análises de Tráfego em Ação</h2>
+        
+        <p style="text-align: center; margin-bottom: 20px; font-size: 1.2rem;">
+            <i class="fas fa-map-marked-alt highlight-text"></i> <strong>Passo 1:</strong> Inferência Dinâmica de Corredores e Macro-Zonas via IA.
+        </p>
+        <div class="iframe-container">
+            <iframe src="biblioteca/mapa_fluxo_sorocaba.html" title="Mapa Interativo de Sorocaba"></iframe>
         </div>
-      </div>
-      <textarea>Placas anonimizadas, data/hora, localização GPS, velocidade e volume. Limitações: dados fragmentados, sem origem/destino explícitos, cobertura parcial (50 sensores), ruído e inconsistência. Os dados são indiretos — a informação precisa ser inferida.</textarea>
-    </div>
 
-    <!-- 5 -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-number">5</span>
-        <div class="card-title-group">
-          <p class="card-title">Estratégia de IA</p>
-          <p class="card-subtitle">Qual abordagem será usada? (Por quê?)</p>
+        <p style="text-align: center; margin-bottom: 20px; font-size: 1.2rem; margin-top: 50px;">
+            <i class="fas fa-clock highlight-text"></i> <strong>Passo 2:</strong> Segmentação Temporal da Mobilidade Viária.
+        </p>
+        <div class="iframe-container">
+            <iframe src="biblioteca/dashboard_temporal.html" title="Dashboard Temporal Plotly"></iframe>
         </div>
-      </div>
-      <textarea>Abordagem híbrida: (1) Modelagem de Grafos (nós=sensores/zonas, arestas=fluxos), (2) Modelos Probabilísticos (Cadeia de Markov, Inferência Bayesiana), (3) Clusterização (grupos de deslocamento similares). Reconstrói trajetórias usando tempo entre sensores e proximidade geográfica.</textarea>
-    </div>
+    </section>
 
-    <!-- 6 -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-number">6</span>
-        <div class="card-title-group">
-          <p class="card-title">Métrica de Avaliação</p>
-          <p class="card-subtitle">Como sabemos que o modelo funciona?</p>
+    <!-- EQUIPE SECTION -->
+    <section id="equipe">
+        <h2 class="section-title">A Equipe</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--text-muted);">
+            Conheça os profissionais por trás da engenharia de dados e modelagem espacial responsáveis pelo MVP.
+        </p>
+        
+        <div class="card" style="margin-top: 40px; border-color: rgba(0, 240, 255, 0.4);">
+            <h3 style="color: var(--neon-cyan); margin-bottom: 5px;">Pearsonianos</h3>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Desafio 1 Splice</p>
+            
+            <div class="team-grid">
+                <div class="team-member"><a href="https://github.com/binhadauma" target="_blank" style="color: inherit; text-decoration: none;"><i class="fab fa-github"></i> Binha Ferraz Dauma</a></div>
+                <div class="team-member"><a href="https://github.com/EDNARDOPPEIXOTO99" target="_blank" style="color: inherit; text-decoration: none;"><i class="fab fa-github"></i> Ednardo Pinheiro Peixoto</a></div>
+                <div class="team-member"><a href="https://github.com/enps2015" target="_blank" style="color: inherit; text-decoration: none;"><i class="fab fa-github"></i> Eric Pimentel</a></div>
+                <div class="team-member"><a href="https://github.com/luis22lf" target="_blank" style="color: inherit; text-decoration: none;"><i class="fab fa-github"></i> Luis Felipe Ferreira</a></div>
+                <div class="team-member"><a href="https://github.com/carlosdelfino" target="_blank" style="color: inherit; text-decoration: none;"><i class="fab fa-github"></i> Carlos Delfino</a></div>
+                <div class="team-member">Dennis Giancarlo</div>
+                <div class="team-member">Ana Temoteo</div>
+                <div class="team-member">Adriano José</div>
+            </div>
         </div>
-      </div>
-      <textarea>Coerência dos fluxos inferidos, consistência temporal dos padrões, validação cruzada entre sensores, similaridade entre fluxos esperados vs estimados, estabilidade dos padrões ao longo do tempo. Avaliação baseada na plausibilidade e consistência dos padrões inferidos.</textarea>
-    </div>
+    </section>
 
-    <!-- 7 -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-number">7</span>
-        <div class="card-title-group">
-          <p class="card-title">Resultado Esperado</p>
-          <p class="card-subtitle">O que queremos gerar?</p>
-        </div>
-      </div>
-      <textarea>Matriz Origem-Destino, mapas de fluxo, gráficos por horário, clusters de mobilidade. Entregáveis: Dashboard interativo, relatório analítico com insights e recomendações, visualizações interativas para comunicação com stakeholders.</textarea>
-    </div>
-
-    <!-- 8 -->
-    <div class="card">
-      <div class="card-header">
-        <span class="card-number">8</span>
-        <div class="card-title-group">
-          <p class="card-title">Impacto Esperado</p>
-          <p class="card-subtitle">Como isso ajudaria na prática?</p>
-        </div>
-      </div>
-      <textarea readonly>Melhor planejamento urbano com dados reais, otimização do transporte público alinhado à demanda, redução de congestionamentos através de intervenções direcionadas, apoio à tomada de decisão com inteligência acionável. Transforma dados fragmentados em políticas públicas baseadas em evidências.</textarea>
-    </div>
-
-  </div>
-
-  <footer>
-    <p class="footer-note">Canvas · Estrutura do Projeto de IA &amp; Dados</p>
-    <button class="btn-print" onclick="window.print()">⎙ Imprimir / Salvar PDF</button>
-  </footer>
-
-</div>
+    <footer>
+        <h4>Pearsonianos - Desafio 1 Splice</h4>
+        <p>Projeto de MVP para a disciplina de IA Aplicada a Problemas Reais.</p>
+        <p>Gêmeos Digitais TIC51 &copy; 2026. Feito com Conhecimento e Apoio de IA Generativa.</p>
+    </footer>
 
 </body>
 </html>

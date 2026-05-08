@@ -1,0 +1,58 @@
+CANVAS MVP: GÊMEO DIGITAL — CIDADES INTELIGENTES
+Desafio 1: Inferência de Fluxos Origem-Destino com IA
+
+================================================================================
+1. PROBLEMA (QUAL DOR?)
+Matriz Origem-Destino e fluxo de veículos nos pontos de captura para apoiar 
+decisões de gestores públicos, como melhorias no trânsito e novos empreendimentos 
+urbanos.
+
+================================================================================
+2. PERGUNTA ANALÍTICA
+"Como inferir a origem, o destino e os padrões de deslocamento dos veículos a 
+partir de leituras pontuais de sensores viários?"
+
+================================================================================
+3. VARIÁVEL-ALVO
+- Variável: Probabilidade de transição entre sensores (Fluxo Si -> Sj).
+- Tipo: Probabilística / Contínua.
+- Definição: A chance de um veículo detectado no sensor A ser o mesmo detectado 
+  no sensor B em um intervalo de tempo plausível.
+
+================================================================================
+4. DADOS DISPONÍVEIS
+- Atributos: NSerie do sensor, Endereço, Placa (anonimizada), Sentido, Latitude, 
+  Longitude, Velocidade e Velocidade média.
+
+================================================================================
+5. ESTRATÉGIA DE IA
+- Clusterização: Agrupamento de dados por sensores para identificar zonas de 
+  influência.
+- Variação Temporal: Análise de séries temporais para identificar horários de 
+  pico e variações nos padrões de movimentação conforme os dias da semana.
+- Motivo: Essencial para entender o comportamento dinâmico da cidade e prever 
+  gargalos em horários específicos.
+
+================================================================================
+6. MÉTRICA DE AVALIAÇÃO
+- Plausibilidade Geográfica: Verificar se os trajetos inferidos são fisicamente 
+  possíveis pelas vias existentes.
+- Consistência de Fluxo: A soma dos veículos entrando em uma zona deve ser 
+  coerente com os que saem.
+- Erro Médio de Tempo: Comparar o tempo de viagem inferido entre sensores com 
+  o tempo real esperado para a distância.
+
+================================================================================
+7. RESULTADO ESPERADO (MVP)
+- Gráficos de fluxo de veículos segmentados por horários e dias da semana.
+- Matriz de Origem-Destino detalhada das viagens inferidas.
+
+================================================================================
+8. IMPACTO ESPERADO
+- Melhorias no trânsito para evitar congestionamentos e aumentar a segurança 
+  viária.
+
+================================================================================
+FRASE FINAL:
+"Transformando dados fragmentados em inteligência acionável para políticas 
+públicas de mobilidade urbana."
